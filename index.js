@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 
 const logger = (req,res,next)=>{
-	console.log(`the ${req.method} has been made at ${Date.now()}`);
+	console.log(`the ${req.method} has been made at ${new Date()}`);
 	next();
 };
 
@@ -30,6 +30,19 @@ if (name && email){
 else{
 	res.status(400).send('Bad request');
 }
+
+})
+
+app.delete('/api/users/:id',(req,res)=>{
+	const id = req.params.id;
+	const delInfo = Usservice.delUser(id);
+	if (delInfo !== null){
+		res.json(delInfo);
+	}
+	else{
+		res.status(404).send('Not found');
+	}
+
 
 })
 
