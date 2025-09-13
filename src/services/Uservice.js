@@ -19,7 +19,7 @@ export const Uservice = ()=>{
 		},
 
 
-	delUser(id){
+		delUser(id){
 			const userIndex = users.findIndex((item)=>item.id === id);
 			if (userIndex !== -1){
 			return users.splice(userIndex,1);
@@ -28,7 +28,23 @@ export const Uservice = ()=>{
 		else {
 			return  null;
 		}
-		}
+		},
 
+		updateUser(id, updateObject){
+			const userToUpdate = users.find((item)=>item.id === id);
+			if (userToUpdate !== undefined){
+			const {name,email}= updateObject;
+			if(name){
+				userToUpdate.name = name;			}
+			if (email){
+				userToUpdate.email = email;
+			}
+
+			return userToUpdate;
+		}
+		else{
+			return null;
+		}
+	}
 	}
 }
