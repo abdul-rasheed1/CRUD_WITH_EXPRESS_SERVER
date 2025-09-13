@@ -46,6 +46,18 @@ app.delete('/api/users/:id',(req,res)=>{
 
 })
 
+app.put('/api/users/:id',(req,res)=>{
+	const id = req.params.id;
+	const updateObject = req.body;
+	const updateUser = Usservice.updateUser(id,updateObject);
+	if (updateUser !== null){
+		res.json(updateUser);
+	}
+	else{
+		res.status(404).send('Not Found');
+	}
+})
+
 app.listen(port, ()=>{
 	console.log(`Server is running at http://localhost ${port}`);
 })
